@@ -1,0 +1,57 @@
+{
+  "name": "@hogoshi/ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./styles.css": {
+      "style": "./styles.css",
+      "default": "./styles.css"
+    },
+    "./src/styles.css": {
+      "style": "./src/styles.css",
+      "default": "./src/styles.css"
+    },
+    "./brand": {
+      "types": "./src/components/logo-mark.ts",
+      "default": "./src/components/logo-mark.ts"
+    }
+  },
+  "files": [
+    "src",
+    "styles.css"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.8.0",
+    "@hogoshi/tokens": "file:../tokens",
+    "@hugeicons-pro/core-duotone-rounded": "^4.2.2",
+    "@hugeicons-pro/core-solid-rounded": "^4.2.2",
+    "@hugeicons-pro/core-stroke-rounded": "^4.2.2",
+    "@hugeicons/react": "^1.1.10",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
+    "highlight.js": "^11.11.1",
+    "recharts": "^3.10.1",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^2.6.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.7.3"
+  }
+}

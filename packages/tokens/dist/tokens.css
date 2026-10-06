@@ -1,0 +1,50 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --font-sans: var(--font-geist-sans, ui-sans-serif, system-ui, -apple-system, sans-serif);
+  --font-mono: var(--font-geist-mono, ui-monospace, SFMono-Regular, monospace);
+  --shadow-sm: 0 1px 2px 0 oklch(0% 0 0 / 0.06);
+  --shadow-md: 0 4px 12px -2px oklch(0% 0 0 / 0.08), 0 2px 4px -2px oklch(0% 0 0 / 0.04);
+  --shadow-lg: 0 16px 40px -8px oklch(0% 0 0 / 0.16), 0 4px 12px -4px oklch(0% 0 0 / 0.08);
+  --row-h: 2.5rem;
+  --gap: 0.75rem;
+  --text-base: 1.0625rem;
+  --radius-md: 1rem;
+  --motion-duration: 180ms;
+  --motion-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --scrollbar-size: 6px;
+  --scrollbar-thumb: color-mix(in oklch, var(--fg-subtle) 55%, transparent);
+  --z-sticky: 20;
+  --z-overlay: 40;
+  --z-modal: 50;
+  --z-popover: 60;
+  --z-toast: 70;
+  --bg: #f2f2f2;
+  --bg-elevated: #ffffff;
+  --bg-subtle: #e8e8e8;
+  --bg-muted: #dedede;
+  --fg: #040404;
+  --fg-muted: #525252;
+  --fg-subtle: #737373;
+  --border: #d4d4d4;
+  --border-strong: #a3a3a3;
+  --accent: #040404;
+  --accent-hover: #1a1a1a;
+  --accent-fg: #f2f2f2;
+  --accent-muted: #e4e4e4;
+  --success: oklch(48% 0.08 150);
+  --warning: oklch(52% 0.08 75);
+  --danger: oklch(50% 0.12 25);
+  --chart-1: oklch(56% 0.18 260);
+  --chart-2: oklch(56% 0.18 300);
+  --chart-3: oklch(60% 0.13 165);
+  --chart-4: oklch(70% 0.15 70);
+  --chart-5: oklch(58% 0.19 20);
+  --chart-6: oklch(62% 0.11 215);
+  --ring: #04040459;
+  --overlay: #04040466;
+  --radius-sm: max(0px, calc(var(--radius-md) - 0.125rem));
+  --radius-lg: calc(var(--radius-md) + 0.25rem);
+}

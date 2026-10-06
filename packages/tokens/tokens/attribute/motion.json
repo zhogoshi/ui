@@ -1,0 +1,6 @@
+{
+  "motion": {
+    "reduced": { "value": "90ms", "type": "duration" },
+    "off": { "value": "0ms", "type": "duration" }
+  }
+}

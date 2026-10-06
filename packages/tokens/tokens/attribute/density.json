@@ -1,0 +1,8 @@
+{
+  "density": {
+    "compact": {
+      "row-h": { "value": "2.125rem", "type": "dimension" },
+      "gap": { "value": "0.5rem", "type": "dimension" }
+    }
+  }
+}

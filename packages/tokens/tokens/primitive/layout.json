@@ -1,0 +1,22 @@
+{
+  "row-h": { "value": "2.5rem", "type": "dimension" },
+  "gap": { "value": "0.75rem", "type": "dimension" },
+  "text-base": { "value": "1.0625rem", "type": "dimension" },
+  "radius": {
+    "md": { "value": "1rem", "type": "dimension" },
+    "sm": { "value": "max(0px, calc({radius.md} - 0.125rem))", "type": "dimension" },
+    "lg": { "value": "calc({radius.md} + 0.25rem)", "type": "dimension" }
+  },
+  "motion-duration": { "value": "180ms", "type": "duration" },
+  "motion-ease": { "value": "cubic-bezier(0.2, 0.8, 0.2, 1)", "type": "cubicBezier" },
+  "scrollbar-size": { "value": "6px", "type": "dimension" },
+  "scrollbar-thumb": {
+    "value": "color-mix(in oklch, var(--fg-subtle) 55%, transparent)",
+    "type": "color"
+  },
+  "z-sticky": { "value": "20", "type": "number" },
+  "z-overlay": { "value": "40", "type": "number" },
+  "z-modal": { "value": "50", "type": "number" },
+  "z-popover": { "value": "60", "type": "number" },
+  "z-toast": { "value": "70", "type": "number" }
+}
