@@ -329,12 +329,19 @@ nav,
 }
 
 html[data-theme-switching],
+html[data-theme-switching] body {
+  overflow: hidden !important;
+}
+
+html[data-theme-switching] body {
+  pointer-events: none !important;
+}
+
 html[data-theme-switching] *,
 html[data-theme-switching] *::before,
 html[data-theme-switching] *::after {
   transition: none !important;
-  animation-duration: 0.01ms !important;
-  animation-delay: 0s !important;
+  animation-play-state: paused !important;
 }
 
 .hogoshi-theme-layer {

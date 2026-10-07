@@ -15,18 +15,75 @@ function applyMode(next: ResolvedMode) {
   document.documentElement.style.colorScheme = next;
 }
 
+function paintTheme(media: HTMLCanvasElement, mode: string | null) {
+  media.dispatchEvent(new CustomEvent("hogoshi-theme-paint", { detail: mode }));
+}
+
 function freeze(media: HTMLVideoElement | HTMLCanvasElement, copy: Element) {
   const canvas = document.createElement("canvas");
   canvas.className = media.className;
   canvas.style.cssText = media.style.cssText;
   canvas.width = media instanceof HTMLVideoElement ? media.videoWidth || media.clientWidth : media.width;
   canvas.height = media instanceof HTMLVideoElement ? media.videoHeight || media.clientHeight : media.height;
+  const next = copy.closest("[data-mode]")?.getAttribute("data-mode") ?? null;
+  const current = document.documentElement.getAttribute("data-mode");
+  if (media instanceof HTMLCanvasElement && next) paintTheme(media, next);
   try {
     canvas.getContext("2d")?.drawImage(media, 0, 0, canvas.width, canvas.height);
   } catch {
+    if (media instanceof HTMLCanvasElement && current) paintTheme(media, current);
     return;
   }
+  if (media instanceof HTMLCanvasElement && current) paintTheme(media, current);
   copy.replaceWith(canvas);
+}
+
+function holdPage() {
+  const root = document.documentElement;
+  root.setAttribute("data-theme-switching", "");
+  const media = [...document.querySelectorAll("video, audio")].filter(
+    (node): node is HTMLMediaElement => node instanceof HTMLMediaElement && !node.paused,
+  );
+  media.forEach((node) => node.pause());
+  const running = document.getAnimations().filter((animation) => animation.playState === "running");
+  running.forEach((animation) => animation.pause());
+  const stop = (event: Event) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+  const onKey = (event: KeyboardEvent) => {
+    if (event.key !== "Enter" && event.key !== " " && event.key !== "Escape") return;
+    stop(event);
+  };
+  const url = location.href;
+  const onPop = () => {
+    if (location.href !== url) history.pushState(null, "", url);
+  };
+  document.addEventListener("click", stop, true);
+  document.addEventListener("auxclick", stop, true);
+  document.addEventListener("submit", stop, true);
+  document.addEventListener("keydown", onKey, true);
+  document.addEventListener("wheel", stop, { capture: true, passive: false });
+  document.addEventListener("touchmove", stop, { capture: true, passive: false });
+  window.addEventListener("popstate", onPop);
+  return () => {
+    document.removeEventListener("click", stop, true);
+    document.removeEventListener("auxclick", stop, true);
+    document.removeEventListener("submit", stop, true);
+    document.removeEventListener("keydown", onKey, true);
+    document.removeEventListener("wheel", stop, true);
+    document.removeEventListener("touchmove", stop, true);
+    window.removeEventListener("popstate", onPop);
+    root.removeAttribute("data-theme-switching");
+    running.forEach((animation) => {
+      try {
+        animation.play();
+      } catch {
+        return;
+      }
+    });
+    media.forEach((node) => void node.play().catch(() => undefined));
+  };
 }
 
 function snapshot(next: ResolvedMode) {
@@ -53,6 +110,15 @@ function snapshot(next: ResolvedMode) {
       copy.scrollTop = node.scrollTop;
       copy.scrollLeft = node.scrollLeft;
     }
+    if (node instanceof HTMLElement && copy instanceof HTMLElement) {
+      const style = getComputedStyle(node);
+      if (style.animationName && style.animationName !== "none") {
+        copy.style.animation = "none";
+        copy.style.opacity = style.opacity;
+        copy.style.filter = style.filter;
+        copy.style.transform = style.transform;
+      }
+    }
     if (node instanceof HTMLVideoElement || node instanceof HTMLCanvasElement) freeze(node, copy);
   });
   layer.scrollTop = window.scrollY;
@@ -60,10 +126,13 @@ function snapshot(next: ResolvedMode) {
   return layer;
 }
 
-function reveal(layer: HTMLElement) {
+function reveal(layer: HTMLElement, inward: boolean) {
   const radius = Math.ceil(Math.hypot(window.innerWidth, window.innerHeight));
+  const full = `circle(${radius}px at 50% 50%)`;
+  const none = "circle(0px at 50% 50%)";
+  if (inward) layer.style.clipPath = full;
   return layer
-    .animate([{ clipPath: "circle(0px at 50% 50%)" }, { clipPath: `circle(${radius}px at 50% 50%)` }], {
+    .animate(inward ? [{ clipPath: full }, { clipPath: none }] : [{ clipPath: none }, { clipPath: full }], {
       duration: REVEAL_MS,
       easing: "cubic-bezier(0.4, 0, 0.2, 1)",
       fill: "forwards",
@@ -99,17 +168,29 @@ export function ThemeToggle({
     }
 
     switching = true;
-    const layer = snapshot(next);
-    void reveal(layer).then(() => {
-      root.setAttribute("data-theme-switching", "");
-      swap(next);
+    const release = holdPage();
+    const current = next === "dark" ? "light" : "dark";
+    const inward = next === "dark";
+    const layer = snapshot(inward ? current : next);
+    const finish = () => {
       layer.remove();
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          root.removeAttribute("data-theme-switching");
+          release();
           switching = false;
         });
       });
+    };
+    if (inward) {
+      const radius = Math.ceil(Math.hypot(window.innerWidth, window.innerHeight));
+      layer.style.clipPath = `circle(${radius}px at 50% 50%)`;
+      swap(next);
+      void reveal(layer, true).then(finish);
+      return;
+    }
+    void reveal(layer, false).then(() => {
+      swap(next);
+      finish();
     });
   };
 
