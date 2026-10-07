@@ -1,8 +1,16 @@
 {
   "name": "@hogoshi/tokens",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.1",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhogoshi/ui.git",
+    "directory": "packages/tokens"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "exports": {
     ".": {
       "types": "./dist/tokens.d.ts",
@@ -36,6 +44,7 @@
   "files": ["dist", "tokens"],
   "scripts": {
     "build": "tsx scripts/build.ts",
+    "prepublishOnly": "pnpm build",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
