@@ -154,7 +154,7 @@ export function BottomBar({ className, children, ...props }: ComponentProps<"nav
   return (
     <nav
       className={cn(
-        "bg-bg-elevated/70 border-border fixed right-[calc(0.75rem+var(--safe-right))] bottom-[calc(0.75rem+var(--safe-bottom))] left-[calc(0.75rem+var(--safe-left))] z-[var(--z-sticky)] rounded-[var(--radius-lg)] border p-1 shadow-[var(--shadow-md)] backdrop-blur-xl md:hidden",
+        "bg-bg-elevated/70 border-border fixed right-[max(0.75rem,var(--safe-right))] bottom-[max(0.5rem,var(--safe-bottom))] left-[max(0.75rem,var(--safe-left))] z-[var(--z-sticky)] rounded-[var(--radius-lg)] border p-1 shadow-[var(--shadow-md)] backdrop-blur-xl md:hidden",
         className,
       )}
       {...props}

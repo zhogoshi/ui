@@ -24,7 +24,7 @@ export function CommandDialog({
   return (
     <CommandPrimitive.Dialog
       overlayClassName="hogoshi-command-overlay fixed inset-0 z-[var(--z-overlay)] bg-transparent backdrop-blur-2xl"
-      contentClassName="hogoshi-command border-border bg-bg-elevated/70 fixed top-[12vh] left-1/2 z-[var(--z-modal)] flex max-h-[min(32rem,calc(100dvh-8rem-var(--safe-bottom)))] w-[calc(100vw-2rem)] max-w-xl flex-col overflow-hidden rounded-[var(--radius-lg)] border shadow-[var(--shadow-lg)] backdrop-blur-xl outline-none"
+      contentClassName="hogoshi-command border-border bg-bg-elevated/70 fixed top-[max(12vh,calc(var(--safe-top)+0.75rem))] left-1/2 z-[var(--z-modal)] flex max-h-[min(32rem,calc(100dvh-max(0.75rem,var(--safe-top))-max(0.75rem,var(--safe-bottom))-2rem))] w-[min(36rem,calc(100vw-max(1rem,var(--safe-left))-max(1rem,var(--safe-right))))] max-w-xl flex-col overflow-hidden rounded-[var(--radius-lg)] border shadow-[var(--shadow-lg)] backdrop-blur-xl outline-none"
       className={cn("flex flex-col", className)}
       {...props}
     >

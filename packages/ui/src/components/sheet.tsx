@@ -18,17 +18,17 @@ const SideContext = createContext<SheetSide>("right");
 const direction = { top: "up", right: "right", bottom: "down", left: "left" } as const;
 
 const edge = {
-  top: "top-[calc(0.75rem+var(--safe-top))]",
-  right: "right-[calc(0.75rem+var(--safe-right))]",
-  bottom: "bottom-[calc(0.75rem+var(--safe-bottom))]",
-  left: "left-[calc(0.75rem+var(--safe-left))]",
+  top: "top-[max(0.75rem,var(--safe-top))]",
+  right: "right-[max(0.75rem,var(--safe-right))]",
+  bottom: "bottom-[max(0.75rem,var(--safe-bottom))]",
+  left: "left-[max(0.75rem,var(--safe-left))]",
 };
 
 const frame = {
   right: `${edge.top} ${edge.bottom} ${edge.right} w-[min(20rem,calc(100vw-1.5rem))]`,
   left: `${edge.top} ${edge.bottom} ${edge.left} w-[min(20rem,calc(100vw-1.5rem))]`,
-  bottom: `${edge.left} ${edge.right} ${edge.bottom} max-h-[min(90dvh,calc(100dvh-1.5rem-var(--safe-top)-var(--safe-bottom)))] md:max-h-[min(32rem,70dvh)]`,
-  top: `${edge.left} ${edge.right} ${edge.top} max-h-[min(90dvh,calc(100dvh-1.5rem-var(--safe-top)-var(--safe-bottom)))] md:max-h-[min(32rem,70dvh)]`,
+  bottom: `${edge.left} ${edge.right} ${edge.bottom} max-h-[min(90dvh,calc(100dvh-max(0.75rem,var(--safe-top))-max(0.75rem,var(--safe-bottom))))] md:max-h-[min(32rem,70dvh)]`,
+  top: `${edge.left} ${edge.right} ${edge.top} max-h-[min(90dvh,calc(100dvh-max(0.75rem,var(--safe-top))-max(0.75rem,var(--safe-bottom))))] md:max-h-[min(32rem,70dvh)]`,
 } as const;
 
 const motion = {

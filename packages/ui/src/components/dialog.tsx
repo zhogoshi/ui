@@ -19,7 +19,7 @@ export function DialogContent({ className, children, ...props }: ComponentProps<
       <BaseDialog.Backdrop className={cn("fixed inset-0 z-[var(--z-overlay)] bg-transparent", backdropMotion)} />
       <BaseDialog.Popup
         className={cn(
-          "border-border bg-bg-elevated/70 fixed top-1/2 left-1/2 z-[var(--z-modal)] grid w-[calc(100vw-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 rounded-[var(--radius-lg)] border p-6 shadow-[var(--shadow-lg)] backdrop-blur-xl outline-none",
+          "border-border bg-bg-elevated/70 fixed top-1/2 left-1/2 z-[var(--z-modal)] grid max-h-[calc(100dvh-max(1rem,var(--safe-top))-max(1rem,var(--safe-bottom)))] w-[min(32rem,calc(100vw-max(1rem,var(--safe-left))-max(1rem,var(--safe-right))))] max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 overflow-y-auto rounded-[var(--radius-lg)] border p-6 shadow-[var(--shadow-lg)] backdrop-blur-xl outline-none",
           popupMotion,
           className,
         )}
