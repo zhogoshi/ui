@@ -41,7 +41,7 @@ export function Sidebar({ className, ...props }: ComponentProps<"aside">) {
     <aside
       data-collapsed={collapsed || undefined}
       className={cn(
-        "bg-bg-elevated border-border hidden h-full min-h-0 w-[calc(15rem+var(--safe-left))] shrink-0 flex-col overflow-hidden border-r pt-[var(--safe-top)] pb-[var(--safe-bottom)] pl-[var(--safe-left)] transition-[width] duration-[var(--motion-duration)] ease-[var(--motion-ease)] md:flex",
+        "bg-bg-elevated border-border hidden h-full min-h-0 w-[calc(15rem+var(--safe-left))] shrink-0 flex-col overflow-hidden border-r pt-[calc(var(--safe-top)+0.5rem)] pb-2 pl-[var(--safe-left)] transition-[width] duration-[var(--motion-duration)] ease-[var(--motion-ease)] md:flex",
         collapsed && "w-[calc(3.5rem+var(--safe-left))]",
         className,
       )}
@@ -154,7 +154,7 @@ export function BottomBar({ className, children, ...props }: ComponentProps<"nav
   return (
     <nav
       className={cn(
-        "bg-bg-elevated/70 border-border fixed right-[max(0.75rem,var(--safe-right))] bottom-[max(0.5rem,var(--safe-bottom))] left-[max(0.75rem,var(--safe-left))] z-[var(--z-sticky)] rounded-[var(--radius-lg)] border p-1 shadow-[var(--shadow-md)] backdrop-blur-xl md:hidden",
+        "bg-bg-elevated/70 border-border fixed right-[max(0.75rem,var(--safe-right))] bottom-2 left-[max(0.75rem,var(--safe-left))] z-[var(--z-sticky)] rounded-[var(--radius-lg)] border p-1 shadow-[var(--shadow-md)] backdrop-blur-xl md:hidden",
         className,
       )}
       {...props}

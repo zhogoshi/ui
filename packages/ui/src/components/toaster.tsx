@@ -13,13 +13,13 @@ export function Toaster() {
       position="bottom-right"
       closeButton
       offset={{
-        bottom: "max(1.5rem, var(--safe-bottom))",
-        right: "max(1.5rem, var(--safe-right))",
+        bottom: "1.5rem",
+        right: "1.5rem",
       }}
       mobileOffset={{
-        bottom: "calc(4.25rem + max(0.5rem, var(--safe-bottom)))",
-        left: "max(1rem, var(--safe-left))",
-        right: "max(1rem, var(--safe-right))",
+        bottom: "5rem",
+        left: "1rem",
+        right: "1rem",
       }}
       style={{ zIndex: "var(--z-toast)" }}
       toastOptions={{
