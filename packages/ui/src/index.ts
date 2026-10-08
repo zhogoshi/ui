@@ -29,7 +29,7 @@ export type { SortDirection } from "./components/table";
 export { Progress } from "./components/progress";
 export { Logo } from "./components/logo";
 export { LOGO_PATH, LOGO_VIEWBOX, logoSvg } from "./components/logo-mark";
-export { Navbar, NavbarItem, NavbarMenu, NavbarMenuLink, NavbarMenus } from "./components/navbar";
+export { Navbar, NavbarItem, NavbarMenu, NavbarMenuLink, NavbarMenus, TopBar } from "./components/navbar";
 export { Glide, glideActive } from "./components/glide";
 export type { GlideProps } from "./components/glide";
 export { Calendar } from "./components/calendar";

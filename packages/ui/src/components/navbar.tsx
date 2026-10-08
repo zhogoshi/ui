@@ -3,7 +3,7 @@
 import { Button as BaseButton } from "@base-ui/react/button";
 import { NavigationMenu } from "@base-ui/react/navigation-menu";
 import { ArrowDown01Icon } from "@hugeicons-pro/core-stroke-rounded";
-import type { ComponentProps, ReactNode } from "react";
+import { useEffect, useState, type ComponentProps, type ReactNode } from "react";
 import { cn } from "../lib/cn";
 import { Glide, glideActive } from "./glide";
 import type { AppIcon } from "./icon";
@@ -13,6 +13,37 @@ const itemClass =
   "text-fg-muted hover:bg-bg-subtle hover:text-fg relative inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-[var(--radius-sm)] px-2.5 text-sm outline-none transition-colors duration-[var(--motion-duration)] focus-visible:ring-2 focus-visible:ring-ring";
 
 const motion = "duration-[calc(var(--motion-duration)*3)] ease-[var(--motion-ease)] motion-reduce:transition-none";
+
+export function TopBar({ contained = false, children, className }: { contained?: boolean; children: ReactNode; className?: string }) {
+  const [compact, setCompact] = useState(false);
+
+  useEffect(() => {
+    const root = document.querySelector("[data-scroll-root]");
+    const read = () => {
+      const top = root instanceof HTMLElement ? root.scrollTop : window.scrollY;
+      setCompact(top > 24);
+    };
+    read();
+    const target: EventTarget = root instanceof HTMLElement ? root : window;
+    target.addEventListener("scroll", read, { passive: true });
+    return () => target.removeEventListener("scroll", read);
+  }, []);
+
+  return (
+    <header className={cn("pointer-events-none inset-x-0 top-0 z-[var(--z-sticky)] flex justify-center", contained ? "absolute" : "fixed", className)}>
+      <div
+        className={cn(
+          "pointer-events-auto flex items-center transition-[width,height,margin,border-radius,background-color,border-color,box-shadow] duration-500 ease-[var(--motion-ease)] motion-reduce:transition-none",
+          compact
+            ? "border-border bg-bg-elevated mt-[calc(var(--safe-top)+0.75rem)] h-12 w-[min(40rem,calc(100%-1.5rem))] rounded-full border px-2 shadow-[var(--shadow-md)]"
+            : "mt-[calc(var(--safe-top)+0.5rem)] h-14 w-full border border-transparent bg-transparent px-3",
+        )}
+      >
+        <Navbar className="relative h-full w-full bg-transparent px-1 shadow-none backdrop-blur-none">{children}</Navbar>
+      </div>
+    </header>
+  );
+}
 
 export function Navbar({ className, children, ...props }: ComponentProps<"header">) {
   return (
