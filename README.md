@@ -8,8 +8,8 @@ Repository: https://github.com/zhogoshi/ui
 
 | Package | Role |
 | --- | --- |
-| `@hogoshi/tokens` | Colors, type, radius, motion. Built from JSON with Style Dictionary. |
-| `@hogoshi/ui` | React components on Base UI. Light and dark only. |
+| `@hogoshi/tokens` | Colors, type, radius, motion. Built from JSON with Style Dictionary. Public on npm. |
+| `@hogoshi/ui` | React components on Base UI. Light and dark only. Public on npm. |
 
 There is no app in this repository. Storybook is a separate repository.
 
@@ -28,6 +28,8 @@ import "@hogoshi/ui/src/styles.css";
 ```
 
 `@hogoshi/ui` also depends on Hugeicons Pro. The app that installs it needs `HUGEICONS_NPM_TOKEN`.
+
+Apps import one stylesheet. It pulls the token CSS. Safe-area variables, the notch navbar, and theme motion live in the kit. A new version is staged from the navigator and is installable only after it is approved on npm.
 
 ## Where
 

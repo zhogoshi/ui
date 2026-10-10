@@ -21,7 +21,7 @@ export function TopBar({ contained = false, children, className }: { contained?:
     const root = document.querySelector("[data-scroll-root]");
     const read = () => {
       const top = root instanceof HTMLElement ? root.scrollTop : window.scrollY;
-      setCompact(top > 24);
+      setCompact((current) => (current ? top > 8 : top > 24));
     };
     read();
     const target: EventTarget = root instanceof HTMLElement ? root : window;
@@ -30,13 +30,13 @@ export function TopBar({ contained = false, children, className }: { contained?:
   }, []);
 
   return (
-    <header className={cn("pointer-events-none inset-x-0 top-0 z-[var(--z-sticky)] flex justify-center", contained ? "absolute" : "fixed", className)}>
+    <header className={cn("pointer-events-none inset-x-0 top-0 z-[var(--z-sticky)]", contained ? "absolute" : "fixed", className)}>
       <div
         className={cn(
-          "pointer-events-auto flex items-center transition-[width,height,margin,border-radius,background-color,border-color,box-shadow] duration-500 ease-[var(--motion-ease)] motion-reduce:transition-none",
+          "pointer-events-auto relative mx-auto flex h-12 items-center border transition-[width,translate,border-radius,background-color,border-color,box-shadow] duration-[calc(var(--motion-duration)*4)] ease-[var(--motion-ease)]",
           compact
-            ? "border-border bg-bg-elevated mt-[calc(var(--safe-top)+0.75rem)] h-12 w-[min(40rem,calc(100%-1.5rem))] rounded-full border px-2 shadow-[var(--shadow-md)]"
-            : "mt-[calc(var(--safe-top)+0.5rem)] h-14 w-full border border-transparent bg-transparent px-3",
+            ? "border-border bg-bg-elevated w-[min(40rem,calc(100%-max(0.75rem,var(--safe-left))-max(0.75rem,var(--safe-right))))] translate-y-[calc(var(--safe-top)+0.75rem)] rounded-full px-2 shadow-[var(--shadow-md)]"
+            : "before:pointer-events-auto w-full translate-y-[var(--safe-top)] border-transparent bg-transparent pl-[max(0.75rem,var(--safe-left))] pr-[max(0.75rem,var(--safe-right))] before:absolute before:inset-x-0 before:bottom-full before:h-[var(--safe-top)] before:content-['']",
         )}
       >
         <Navbar className="relative h-full w-full bg-transparent px-1 shadow-none backdrop-blur-none">{children}</Navbar>

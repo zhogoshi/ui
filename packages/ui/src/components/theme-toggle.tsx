@@ -38,6 +38,41 @@ function freeze(media: HTMLVideoElement | HTMLCanvasElement, copy: Element) {
   copy.replaceWith(canvas);
 }
 
+function lockScroll() {
+  const root = document.querySelector("[data-scroll-root]");
+  if (root instanceof HTMLElement) {
+    const top = root.scrollTop;
+    const left = root.scrollLeft;
+    return () => {
+      root.scrollTop = top;
+      root.scrollLeft = left;
+    };
+  }
+  const top = window.scrollY;
+  const left = window.scrollX;
+  const body = document.body;
+  const prev = {
+    position: body.style.position,
+    top: body.style.top,
+    left: body.style.left,
+    right: body.style.right,
+    width: body.style.width,
+  };
+  body.style.position = "fixed";
+  body.style.top = `-${top}px`;
+  body.style.left = "0";
+  body.style.right = "0";
+  body.style.width = "100%";
+  return () => {
+    body.style.position = prev.position;
+    body.style.top = prev.top;
+    body.style.left = prev.left;
+    body.style.right = prev.right;
+    body.style.width = prev.width;
+    window.scrollTo(left, top);
+  };
+}
+
 function holdPage() {
   const root = document.documentElement;
   root.setAttribute("data-theme-switching", "");
@@ -160,9 +195,7 @@ export function ThemeToggle({
     if (switching) return;
     const root = document.documentElement;
     const next = root.getAttribute("data-mode") === "dark" ? "light" : "dark";
-    const reduce =
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches || root.getAttribute("data-motion") === "off";
-    if (reduce) {
+    if (root.getAttribute("data-motion") === "off") {
       swap(next);
       return;
     }
@@ -172,8 +205,10 @@ export function ThemeToggle({
     const current = next === "dark" ? "light" : "dark";
     const inward = next === "dark";
     const layer = snapshot(inward ? current : next);
+    const unlock = lockScroll();
     const finish = () => {
       layer.remove();
+      unlock();
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           release();

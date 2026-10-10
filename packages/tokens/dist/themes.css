@@ -96,14 +96,6 @@
 :root[data-radius="7"] { --radius-md: 0.875rem; }
 
 :root[data-radius="8"] { --radius-md: 1rem; }
-
-:root[data-radius="9"] { --radius-md: 1.25rem; }
-
-:root[data-radius="10"] { --radius-md: 1.5rem; }
-
-:root[data-radius="11"] { --radius-md: 1.75rem; }
-
-:root[data-radius="12"] { --radius-md: 2rem; }
 :root[data-motion="off"] *,
 :root[data-motion="off"] *::before,
 :root[data-motion="off"] *::after {
@@ -111,13 +103,4 @@
   animation-duration: 0.01ms !important;
   animation-iteration-count: 1 !important;
   scroll-behavior: auto !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-  }
 }

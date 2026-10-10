@@ -33,8 +33,7 @@ function markScrolling(element: Element) {
 
 function motionAllowed() {
   const motion = document.documentElement.getAttribute("data-motion");
-  if (motion === "off" || motion === "reduced") return false;
-  return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  return motion !== "off" && motion !== "reduced";
 }
 
 function stop(element: Element) {
