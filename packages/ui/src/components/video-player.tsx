@@ -3,7 +3,6 @@
 import {
   Alert02Icon,
   FullScreenIcon,
-  MinimizeScreenIcon,
   PauseIcon,
   PictureInPictureOnIcon,
   PlayIcon,
@@ -23,6 +22,7 @@ import {
   type RefObject,
 } from "react";
 import { cn } from "../lib/cn";
+import { CollapseScreenIcon } from "./collapse-screen-icon";
 import { Icon, type AppIcon } from "./icon";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { Slider } from "./slider";
@@ -549,7 +549,7 @@ export function VideoPlayer({
           <Control label="Picture in picture" icon={PictureInPictureOnIcon} onClick={togglePip} />
           <Control
             label={fullscreen ? "Exit fullscreen" : "Fullscreen"}
-            icon={fullscreen ? MinimizeScreenIcon : FullScreenIcon}
+            icon={fullscreen ? CollapseScreenIcon : FullScreenIcon}
             onClick={toggleFullscreen}
           />
         </div>
