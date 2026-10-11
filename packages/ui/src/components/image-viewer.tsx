@@ -1,7 +1,6 @@
 "use client";
 
 import { Dialog as BaseDialog } from "@base-ui/react/dialog";
-import { FullScreenIcon } from "@hugeicons-pro/core-solid-rounded";
 import {
   ArrowLeft01Icon,
   ArrowRight01Icon,
@@ -24,9 +23,7 @@ import {
 import { cn } from "../lib/cn";
 import { ContextMenuContent, ContextMenuItem, ContextMenuRoot, ContextMenuTrigger } from "./context-menu";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./dropdown-menu";
-import { CollapseScreenIcon } from "./collapse-screen-icon";
 import { Icon } from "./icon";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 import { backdropMotion, popupMotion } from "./popup";
 
 export interface ViewerImage {
@@ -320,28 +317,11 @@ export function ImageGallery({
   className?: string;
   imageClassName?: string;
 }) {
-  const root = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
-  const [full, setFull] = useState(false);
-  useEffect(() => {
-    const sync = () => setFull(document.fullscreenElement === root.current);
-    document.addEventListener("fullscreenchange", sync);
-    return () => document.removeEventListener("fullscreenchange", sync);
-  }, []);
-  const toggleFull = () => {
-    const node = root.current as (HTMLDivElement & { webkitRequestFullscreen?: () => void }) | null;
-    if (document.fullscreenElement) void document.exitFullscreen();
-    else if (node?.requestFullscreen) void node.requestFullscreen();
-    else node?.webkitRequestFullscreen?.();
-  };
   return (
     <>
-      <div
-        ref={root}
-        className={cn("relative min-w-0 pb-10", full && "bg-bg flex h-full w-full items-center justify-center p-6 pb-16")}
-      >
-      <div className={cn("grid min-w-0 grid-cols-[repeat(auto-fill,minmax(min(100%,8rem),1fr))] gap-2", full && "w-full max-w-5xl", className)}>
+      <div className={cn("grid min-w-0 grid-cols-[repeat(auto-fill,minmax(min(100%,8rem),1fr))] gap-2", className)}>
         {images.map((image, at) => (
           <button
             key={`${image.src}-${at}`}
@@ -365,23 +345,6 @@ export function ImageGallery({
             />
           </button>
         ))}
-      </div>
-      <Tooltip>
-        <TooltipTrigger
-          delay={0}
-          render={
-            <button
-              type="button"
-              aria-label={full ? "Exit fullscreen" : "Fullscreen"}
-              className="text-fg-muted hover:bg-bg-muted hover:text-fg absolute right-2 bottom-2 inline-flex size-7 items-center justify-center rounded-[var(--radius-sm)]"
-              onClick={toggleFull}
-            />
-          }
-        >
-          <Icon icon={full ? CollapseScreenIcon : FullScreenIcon} size={16} />
-        </TooltipTrigger>
-        <TooltipContent>{full ? "Exit fullscreen" : "Fullscreen"}</TooltipContent>
-      </Tooltip>
       </div>
       <ImageViewer images={images} index={index} open={open} onOpenChange={setOpen} onIndexChange={setIndex} />
     </>
