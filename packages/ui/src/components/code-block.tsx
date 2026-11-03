@@ -59,12 +59,14 @@ export function CodeBlock({
   language = "auto",
   variant = "full",
   showLanguage = true,
+  scroll = false,
   className,
 }: {
   code: string;
   language?: string;
   variant?: "full" | "snippet";
   showLanguage?: boolean;
+  scroll?: boolean;
   className?: string;
 }) {
   const [copied, setCopied] = useState(false);
@@ -110,8 +112,14 @@ export function CodeBlock({
           <TooltipContent>{copied ? "Copied" : "Copy"}</TooltipContent>
         </Tooltip>
       </div>
-      <pre className="hogoshi-code w-full min-w-0 max-w-full p-4 pr-24 font-mono text-xs wrap-anywhere whitespace-pre-wrap">
-        <code className="wrap-anywhere whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: painted.html }} />
+      <pre
+        className={cn(
+          "hogoshi-code w-full min-w-0 max-w-full p-4 pr-24 font-mono text-xs",
+          scroll ? "max-h-[28rem] overflow-auto whitespace-pre" : "wrap-anywhere whitespace-pre-wrap",
+          className,
+        )}
+      >
+        <code className={scroll ? "whitespace-pre" : "wrap-anywhere whitespace-pre-wrap"} dangerouslySetInnerHTML={{ __html: painted.html }} />
       </pre>
     </div>
   );

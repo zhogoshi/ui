@@ -20,6 +20,18 @@ export {
   useSidebar,
 } from "./components/sidebar";
 export { Card, CardDescription, CardHeader, CardTitle } from "./components/card";
+export {
+  ChatActions,
+  ChatAttach,
+  ChatComposer,
+  ChatDiff,
+  ChatMedia,
+  ChatMessage,
+  ChatSuggest,
+  ChatThinking,
+  ChatToolCall,
+} from "./components/chat";
+export type { ChatContextItem, ChatModelOption, ChatSuggestItem, ChatToolStatus } from "./components/chat";
 export { BootScreen, PageLoader } from "./components/page-loader";
 export { Breadcrumb } from "./components/breadcrumb";
 export type { BreadcrumbItem } from "./components/breadcrumb";
