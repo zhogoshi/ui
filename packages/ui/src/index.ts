@@ -42,6 +42,7 @@ export { Progress } from "./components/progress";
 export { Logo } from "./components/logo";
 export { LOGO_PATH, LOGO_VIEWBOX, logoSvg } from "./components/logo-mark";
 export { Navbar, NavbarItem, NavbarMenu, NavbarMenuLink, NavbarMenus, TopBar } from "./components/navbar";
+export { ChromeVeil } from "./components/chrome-veil";
 export { Glide, glideActive } from "./components/glide";
 export type { GlideProps } from "./components/glide";
 export { Calendar } from "./components/calendar";

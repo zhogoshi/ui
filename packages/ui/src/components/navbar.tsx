@@ -5,6 +5,7 @@ import { NavigationMenu } from "@base-ui/react/navigation-menu";
 import { ArrowDown01Icon } from "@hugeicons-pro/core-stroke-rounded";
 import { useEffect, useState, type ComponentProps, type ReactNode } from "react";
 import { cn } from "../lib/cn";
+import { ChromeVeil } from "./chrome-veil";
 import { Glide, glideActive } from "./glide";
 import type { AppIcon } from "./icon";
 import { Icon } from "./icon";
@@ -31,12 +32,13 @@ export function TopBar({ contained = false, children, className }: { contained?:
 
   return (
     <header className={cn("pointer-events-none inset-x-0 top-0 z-[var(--z-sticky)]", contained ? "absolute" : "fixed", className)}>
+      <ChromeVeil side="top" />
       <div
         className={cn(
-          "pointer-events-auto relative mx-auto flex h-12 items-center border transition-[width,translate,border-radius,background-color,border-color,box-shadow] duration-[calc(var(--motion-duration)*4)] ease-[var(--motion-ease)]",
+          "pointer-events-auto relative mx-auto flex h-12 translate-y-[var(--topbar-offset)] items-center border transition-[width,border-radius,background-color,border-color,box-shadow] duration-[calc(var(--motion-duration)*4)] ease-[var(--motion-ease)]",
           compact
-            ? "border-border bg-bg-elevated w-[min(40rem,calc(100%-max(0.75rem,var(--safe-left))-max(0.75rem,var(--safe-right))))] translate-y-[calc(var(--safe-top)+0.75rem)] rounded-full px-2 shadow-[var(--shadow-md)]"
-            : "before:pointer-events-auto w-full translate-y-[var(--safe-top)] border-transparent bg-transparent pl-[max(0.75rem,var(--safe-left))] pr-[max(0.75rem,var(--safe-right))] before:absolute before:inset-x-0 before:bottom-full before:h-[var(--safe-top)] before:content-['']",
+            ? "border-border bg-bg-elevated w-[min(40rem,calc(100%-max(0.75rem,var(--safe-left))-max(0.75rem,var(--safe-right))))] rounded-full px-2 shadow-[var(--shadow-md)]"
+            : "w-full border-transparent bg-transparent pl-[max(0.75rem,var(--safe-left))] pr-[max(0.75rem,var(--safe-right))]",
         )}
       >
         <Navbar className="relative h-full w-full bg-transparent px-1 shadow-none backdrop-blur-none">{children}</Navbar>
