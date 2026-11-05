@@ -5,7 +5,6 @@ import { NavigationMenu } from "@base-ui/react/navigation-menu";
 import { ArrowDown01Icon } from "@hugeicons-pro/core-stroke-rounded";
 import { useEffect, useState, type ComponentProps, type ReactNode } from "react";
 import { cn } from "../lib/cn";
-import { ChromeVeil } from "./chrome-veil";
 import { Glide, glideActive } from "./glide";
 import type { AppIcon } from "./icon";
 import { Icon } from "./icon";
@@ -32,7 +31,6 @@ export function TopBar({ contained = false, children, className }: { contained?:
 
   return (
     <header className={cn("pointer-events-none inset-x-0 top-0 z-[var(--z-sticky)]", contained ? "absolute" : "fixed", className)}>
-      <ChromeVeil side="top" />
       <div
         className={cn(
           "pointer-events-auto relative mx-auto flex h-12 translate-y-[var(--topbar-offset)] items-center border transition-[width,border-radius,background-color,border-color,box-shadow] duration-[calc(var(--motion-duration)*4)] ease-[var(--motion-ease)]",

@@ -4,7 +4,6 @@ import { Button as BaseButton } from "@base-ui/react/button";
 import { SidebarLeftIcon } from "@hugeicons-pro/core-stroke-rounded";
 import { createContext, useContext, useEffect, useMemo, useState, type ComponentProps, type ReactNode } from "react";
 import { cn } from "../lib/cn";
-import { ChromeVeil } from "./chrome-veil";
 import type { AppIcon, IconVariant } from "./icon";
 import { Glide, glideActive } from "./glide";
 import { Icon } from "./icon";
@@ -153,22 +152,19 @@ export function SidebarItem({
 
 export function BottomBar({ className, children, ...props }: ComponentProps<"nav">) {
   return (
-    <>
-      <ChromeVeil side="bottom" fixed className="md:hidden" />
-      <nav
-        data-bottom-bar
-        className={cn(
-          "bg-bg-elevated/70 border-border fixed right-[var(--edge-right)] bottom-[var(--bottombar-offset)] left-[var(--edge-left)] z-[var(--z-sticky)] rounded-[var(--radius-lg)] border p-1 shadow-[var(--shadow-md)] backdrop-blur-xl md:hidden",
-          className,
-        )}
-        {...props}
-      >
-        <div className="relative flex items-stretch justify-around">
-          <Glide selector={ACTIVE} className="bg-accent-muted/60 rounded-[var(--radius-md)]" />
-          {children}
-        </div>
-      </nav>
-    </>
+    <nav
+      data-bottom-bar
+      className={cn(
+        "bg-bg-elevated/70 border-border fixed right-[var(--edge-right)] bottom-[var(--bottombar-offset)] left-[var(--edge-left)] z-[var(--z-sticky)] rounded-[var(--radius-lg)] border p-1 shadow-[var(--shadow-md)] backdrop-blur-xl md:hidden",
+        className,
+      )}
+      {...props}
+    >
+      <div className="relative flex items-stretch justify-around">
+        <Glide selector={ACTIVE} className="bg-accent-muted/60 rounded-[var(--radius-md)]" />
+        {children}
+      </div>
+    </nav>
   );
 }
 
