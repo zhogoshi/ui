@@ -78,15 +78,25 @@ body {
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-left: env(safe-area-inset-left, 0px);
   --app-height: 100dvh;
+  --edge-x: 0.75rem;
+  --edge-left: max(var(--edge-x), var(--safe-left));
+  --edge-right: max(var(--edge-x), var(--safe-right));
   --topbar-offset: calc(var(--safe-top) + 0.75rem);
   --topbar-space: calc(var(--topbar-offset) + 3.75rem);
-  --bottombar-offset: max(0.5rem, var(--safe-bottom));
+  --bottombar-offset: calc(var(--safe-bottom) + 0.75rem);
   --bottombar-space: calc(var(--bottombar-offset) + 4.25rem);
+  --toast-bottom: calc(var(--safe-bottom) + 1.5rem);
 }
 
 @media (display-mode: standalone) {
   :root {
     --app-height: 100vh;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  html:has([data-bottom-bar]) {
+    --toast-bottom: var(--bottombar-space);
   }
 }
 
@@ -109,6 +119,7 @@ body {
 
 html {
   scroll-behavior: auto;
+  touch-action: pan-x pan-y;
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;

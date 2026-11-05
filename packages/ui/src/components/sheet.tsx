@@ -18,10 +18,10 @@ const SideContext = createContext<SheetSide>("right");
 const direction = { top: "up", right: "right", bottom: "down", left: "left" } as const;
 
 const edge = {
-  top: "top-[calc(var(--safe-top)+0.75rem)]",
-  right: "right-[max(0.75rem,var(--safe-right))]",
-  bottom: "bottom-2",
-  left: "left-[max(0.75rem,var(--safe-left))]",
+  top: "top-[var(--topbar-offset)]",
+  right: "right-[var(--edge-right)]",
+  bottom: "bottom-[var(--bottombar-offset)]",
+  left: "left-[var(--edge-left)]",
 };
 
 const frame = {

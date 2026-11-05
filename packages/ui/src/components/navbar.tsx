@@ -37,8 +37,8 @@ export function TopBar({ contained = false, children, className }: { contained?:
         className={cn(
           "pointer-events-auto relative mx-auto flex h-12 translate-y-[var(--topbar-offset)] items-center border transition-[width,border-radius,background-color,border-color,box-shadow] duration-[calc(var(--motion-duration)*4)] ease-[var(--motion-ease)]",
           compact
-            ? "border-border bg-bg-elevated w-[min(40rem,calc(100%-max(0.75rem,var(--safe-left))-max(0.75rem,var(--safe-right))))] rounded-full px-2 shadow-[var(--shadow-md)]"
-            : "w-full border-transparent bg-transparent pl-[max(0.75rem,var(--safe-left))] pr-[max(0.75rem,var(--safe-right))]",
+            ? "border-border bg-bg-elevated w-[min(40rem,calc(100%-var(--edge-left)-var(--edge-right)))] rounded-full px-2 shadow-[var(--shadow-md)]"
+            : "w-full border-transparent bg-transparent pr-[var(--edge-right)] pl-[var(--edge-left)]",
         )}
       >
         <Navbar className="relative h-full w-full bg-transparent px-1 shadow-none backdrop-blur-none">{children}</Navbar>
