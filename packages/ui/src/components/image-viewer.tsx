@@ -204,7 +204,7 @@ export function ImageViewer({
           }}
         >
           <BaseDialog.Title className="sr-only">{image.alt ?? fileName(image)}</BaseDialog.Title>
-          <div className="flex shrink-0 items-center gap-2 px-3 pt-[calc(0.75rem+var(--safe-top))] pr-[calc(0.75rem+var(--safe-right))] pb-3 pl-[calc(0.75rem+var(--safe-left))]">
+          <div className="flex shrink-0 items-center gap-2 px-3 pt-[max(3.25rem,calc(0.75rem+var(--safe-top)))] pr-[calc(0.75rem+var(--safe-right))] pb-3 pl-[max(1rem,var(--safe-left))]">
             <p className="text-fg-muted min-w-0 flex-1 truncate text-sm">
               {count > 1 ? <span className="text-fg mr-2 tabular-nums">{index + 1} / {count}</span> : null}
               {image.alt ?? fileName(image)}

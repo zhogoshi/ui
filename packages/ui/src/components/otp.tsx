@@ -1,7 +1,7 @@
 "use client";
 
 import { OTPField } from "@base-ui/react/otp-field";
-import { useRef, useState, type ComponentProps } from "react";
+import { useEffect, useRef, useState, type ComponentProps } from "react";
 import { cn } from "../lib/cn";
 
 const slotClass =
@@ -51,6 +51,7 @@ function OtpSlot({ text }: { text: string }) {
 type OtpProps = Omit<ComponentProps<typeof OTPField.Root>, "length" | "mask"> & {
   length?: number;
   mask?: boolean;
+  autoFocus?: boolean;
 };
 
 export function Otp({
@@ -61,11 +62,20 @@ export function Otp({
   defaultValue = "",
   onValueChange,
   onValueComplete,
+  autoFocus,
   ...props
 }: OtpProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [inner, setInner] = useState(defaultValue);
   const current = value ?? inner;
+
+  useEffect(() => {
+    if (!autoFocus) return;
+    const id = requestAnimationFrame(() => {
+      rootRef.current?.querySelector<HTMLInputElement>("input")?.focus();
+    });
+    return () => cancelAnimationFrame(id);
+  }, [autoFocus]);
 
   return (
     <OTPField.Root
