@@ -113,3 +113,4 @@ export type { SleepTimer, VideoFit } from "./components/video-settings";
 export { ThemeProvider, useTheme } from "./theme/theme";
 export type { ColorMode, ResolvedMode } from "./theme/theme";
 export { THEME_INIT_SCRIPT } from "./theme/theme-script";
+export { protect } from "./lib/protect";
